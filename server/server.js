@@ -8,9 +8,9 @@ server
   .use(express.json())
   .use(express.urlencoded({extended: false}))
   .use((req, res, next) => {
-    res.header("Access-Controll-Allow-Origin", "*");
-    res.header("Access-Controll-Allow-Headers", "*");
-    res.header("Access-Controll-Allow-Methods", "*");
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "*");
+    res.header("Access-Control-Allow-Methods", "*");
 
     next();
   });
@@ -19,8 +19,8 @@ server.listen(3000, () => {
     console.log("Server is running")
 });
 
-server.get("/users", (req, res) => {
-    const sql = "SELECT * FROM users";
+server.get("/players", (req, res) => {
+    const sql = "SELECT * FROM players";
 
     db.all(sql, (err, rows) => {
         if(err) {
