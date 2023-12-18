@@ -35,3 +35,37 @@ function fetchData(){
         
     });
 }
+
+console.log(userForm);
+userForm.addEventListener("submit", handleSubmit);
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const serverPlayerObject = {
+        firstName: "",
+        lastName: "",
+        team: "",
+        position: "",
+        teamcolor: "",
+    };
+
+    serverPlayerObject.firstName = userForm.firstName.value;
+    serverPlayerObject.lastName = userForm.lastName.value;
+    serverPlayerObject.team = userForm.team.value;
+    serverPlayerObject.position = userForm.position.value;
+    serverPlayerObject.teamcolor = userForm.teamcolor.value;
+
+    console.log(userForm.firstName.value)
+    const request = new Request(url, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(serverPlayerObject)
+    });
+
+    fetch(request).then(response => {
+        fetchData();
+        userForm.reset();
+    });
+}

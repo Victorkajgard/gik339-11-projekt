@@ -29,4 +29,19 @@ server.get("/players", (req, res) => {
             res.send(rows);
         }
     })
+});
+
+server.post("/players", (req, res) => {
+    const player = req.body;
+    const sql = `INSERT INTO players(firstName, lastName, team, position, teamcolor) VALUES
+    (?,?,?,?,?)`;
+
+    db.run(sql, Object.values(player), (err) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send(err);
+        } else {
+            res.send("Spelaren sparades")
+        }
+    });
 })
