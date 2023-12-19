@@ -8,18 +8,22 @@ function fetchData(){
             let html = `<ul class="w-3/4 my-3 mx-auto flex flex-wrap gap-2 justify-center">`;
             players.forEach((player) => {
                 html += `<li
-                class="bg-${player.teamcolor}-200 basis-1/4 text-${player.teamcolor}-900 p-2 rounded-md border-2 border-${player.teamcolor}-400 flex flex-col justify-between">
+                class="bg-${player.teamcolor1}-200 basis-1/4 text-${player.teamcolor2}-900 p-2 rounded-md border-2 border-${player.teamcolor}-400 flex flex-col justify-between">
+    
                 <h3>${player.firstName} ${player.lastName}</h3>
                 <p>Lag: ${player.team}</p>
+                <p>Position: ${player.position}</p>
                 <div>
                   <button
                     class="rounded-md bg-white/50 p-1 text-sm"
                     <button
-                      class="border border-${player.teamcolor}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2">
+                      class="border border-${player.teamcolor2}-300 hover:bg-white/100 
+                      rounded-md bg-white/50 p-1 text-sm mt-2" onclick="setCurrentPlayer(${player.id})">
                       Ändra
                   
                   </button>
-                  <button class="border border-${player.teamcolor}-300 hover:bg-white/100 rounded-md bg-white/50 p-1 text-sm mt-2">
+                  <button class="border border-${player.teamcolor2}-300 hover:bg-white/100 
+                  rounded-md bg-white/50 p-1 text-sm mt-2" onclick="deletePlayer(${player.id})">
                     Ta bort
                   </button>
                 </div>
@@ -36,6 +40,27 @@ function fetchData(){
     });
 }
 
+function setCurrentPlayer(id) {
+    fetch(`${url}/${id}`)
+        .then(result => result.json())
+        .then((player) => {
+            userForm.firstName.value = player.firstName;
+            userForm.lastName.value = player.lastName;
+            userForm.team.value = player.team;
+            userForm.position.value = player.position;
+            userForm.teamcolor1.value = player.teamcolor1;
+            userForm.teamcolor2.value = player.teamcolor2;
+            
+
+            localStorage.setItem("currentId", player.id);
+        })
+}
+
+function deletePlayer(id) {
+    fetch(`${url}/${id}`, {method: 'DELETE'})
+        .then((result) => fetchData());
+}
+
 console.log(userForm);
 userForm.addEventListener("submit", handleSubmit);
 
@@ -46,18 +71,23 @@ function handleSubmit(e) {
         lastName: "",
         team: "",
         position: "",
-        teamcolor: "",
+        teamcolor1: "",
+        teamcolor2: ""
     };
 
     serverPlayerObject.firstName = userForm.firstName.value;
     serverPlayerObject.lastName = userForm.lastName.value;
     serverPlayerObject.team = userForm.team.value;
     serverPlayerObject.position = userForm.position.value;
-    serverPlayerObject.teamcolor = userForm.teamcolor.value;
+    serverPlayerObject.teamcolor1 = userForm.teamcolor1.value;
+    serverPlayerObject.teamcolor2 = userForm.teamcolor2.value;
 
-    console.log(userForm.firstName.value)
+    const id = localStorage.getItem("currentId");
+    if(id) serverPlayerObject.id = id;
+
+
     const request = new Request(url, {
-        method: "POST",
+        method: serverPlayerObject.id ? "PUT" : "POST",
         headers: {
             "content-type": "application/json"
         },
@@ -66,6 +96,7 @@ function handleSubmit(e) {
 
     fetch(request).then(response => {
         fetchData();
+        localStorage.removeItem("currentId");
         userForm.reset();
     });
 }
