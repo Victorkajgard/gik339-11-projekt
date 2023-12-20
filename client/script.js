@@ -42,14 +42,11 @@ function setCurrentPlayer(id) {
     fetch(`${url}/${id}`)
         .then(result => result.json())
         .then((player) => {
-            let hej = document.getElementById("team");
-            teamArray = hej.value.split(",");
             userForm.firstName.value = player.firstName;
             userForm.lastName.value = player.lastName;
-            userForm.team = teamArray[0];
+            userForm.team.value = `${player.team},${player.teamcolor1},${player.teamcolor2}`;
             userForm.position.value = player.position;
-            userForm.teamcolor1.value = player.teamcolor1;
-            userForm.teamcolor2.value = player.teamcolor2;
+  
             
 
             localStorage.setItem("currentId", player.id);
