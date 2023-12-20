@@ -14,8 +14,6 @@ function fetchData(){
                 <p>Lag: ${player.team}</p>
                 <p>Position: ${player.position}</p>
                 <div>
-                  <button
-                    class="rounded-md bg-white/50 p-1 text-sm"
                     <button
                       class="border border-${player.teamcolor2} hover:bg-white/100 
                       rounded-md bg-white/50 p-1 text-sm mt-2" onclick="setCurrentPlayer(${player.id})">
