@@ -72,13 +72,14 @@ function handleSubmit(e) {
         teamcolor1: "",
         teamcolor2: ""
     };
-
+    let e = document.getElementById("team");
+    teamArray = e.value.split(",");
     serverPlayerObject.firstName = userForm.firstName.value;
     serverPlayerObject.lastName = userForm.lastName.value;
-    serverPlayerObject.team = userForm.team.value;
+    serverPlayerObject.team = teamArray[0];
     serverPlayerObject.position = userForm.position.value;
-    serverPlayerObject.teamcolor1 = userForm.teamcolor1.value;
-    serverPlayerObject.teamcolor2 = userForm.teamcolor2.value;
+    serverPlayerObject.teamcolor1 = teamArray[1];
+    serverPlayerObject.teamcolor2 = teamArray[2];
 
     const id = localStorage.getItem("currentId");
     if(id) serverPlayerObject.id = id;
