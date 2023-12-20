@@ -42,9 +42,11 @@ function setCurrentPlayer(id) {
     fetch(`${url}/${id}`)
         .then(result => result.json())
         .then((player) => {
+            let hej = document.getElementById("team");
+            teamArray = hej.value.split(",");
             userForm.firstName.value = player.firstName;
             userForm.lastName.value = player.lastName;
-            userForm.team.value = player.team;
+            userForm.team = teamArray[0];
             userForm.position.value = player.position;
             userForm.teamcolor1.value = player.teamcolor1;
             userForm.teamcolor2.value = player.teamcolor2;
@@ -72,11 +74,12 @@ function handleSubmit(e) {
         teamcolor1: "",
         teamcolor2: ""
     };
-    let e = document.getElementById("team");
-    teamArray = e.value.split(",");
+
+    let hej = document.getElementById("team");
+    teamArray = hej.value.split(",");
     serverPlayerObject.firstName = userForm.firstName.value;
     serverPlayerObject.lastName = userForm.lastName.value;
-    serverPlayerObject.team = teamArray[0];
+    serverPlayerObject.team = teamArray[0]
     serverPlayerObject.position = userForm.position.value;
     serverPlayerObject.teamcolor1 = teamArray[1];
     serverPlayerObject.teamcolor2 = teamArray[2];
