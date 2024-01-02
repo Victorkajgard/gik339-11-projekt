@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="shortcut icon" href="#" />
-    <title>NHL Players</title>
+    <title>NHL Spelare</title>
   </head>
   <body class="min-h-[100vh] bg-gradient-to-b from-slate-800 to-slate-700 text-white">
     <header class="mt-10 text-center">
-      <h1 class="text-3xl">NHL Players</h1>
+      <h1 class="text-3xl">NHL Spelare</h1>
     </header>
     <main class="mt-10">
       <div class="w-[55rem] mx-auto mt-8 bg-white/25 p-3 rounded-lg">
@@ -64,45 +64,13 @@
           <div class="form-control my-4 mx-auto flex w-3/4 items-center">
             <label for="position" class="mr-4 text-xl w-40">Position</label>
             <select class="bg-white text-slate-800 p-1 flex-1 rounded-md" name="position">
-            <option>Goalie</option>
-            <option>Defensemen</option>
+            <option>Målvakt</option>
+            <option>Back</option>
             <option>Center</option>
             <option>Forward</option>
           </select>
           </div>
-          <!-- <div class="form-control my-4 mx-auto flex w-3/4 items-center">
-            <label for="teamcolor" class="mr-4 text-xl w-40">Lagfärg 1</label>
-            <select class="bg-white text-slate-800 p-1 flex-1 rounded-md" name="teamcolor1">
-              <option value="blue-700">Blå</option>
-              <option value="gray-200">Grå</option>
-              <option value="green-700">Grön</option>
-              <option value="yellow-300">Gul</option>
-              <option value="yellow-600">Guld</option>
-              <option value="orange-500">Orange</option>
-              <option value="red-700">Röd</option>
-              <option value="stone-950">Svart</option>
-              <option value="cyan-800">Turkos</option>
-              <option value="stone-50">Vit</option>
-
-            </select>
-          </div>
-          <div class="form-control my-4 mx-auto flex w-3/4 items-center">
-            <label for="teamcolor" class="mr-4 text-xl w-40">Lagfärg 2</label>
-            <select class="bg-white text-slate-800 p-1 flex-1 rounded-md" name="teamcolor2">
-              <option value="blue-700">Blå</option>
-              <option value="gray-200">Grå</option>
-              <option value="green-700">Grön</option>
-              <option value="yellow-300">Gul</option>
-              <option value="yellow-600">Guld</option>
-              <option value="orange-500">Orange</option>
-              <option value="red-700">Röd</option>
-              <option value="stone-950">Svart</option>
-              <option value="cyan-800">Turkos</option>
-              <option value="stone-50">Vit</option>
-
-            </select> -->
-          <!-- </div> -->
-
+          
           
       
           <div class="form-control my-4 mx-auto flex w-3/4 items-center justify-end gap-4">
@@ -114,7 +82,7 @@
             </button>
             <button
               class="px-4 py-1 bg-slate-200 text-slate-800 rounded-md hover:bg-slate-300"
-              type="submit" onclick="createModal()"
+              type="button" onclick="createModal()"
               name="submitUserForm">
               Skicka
             </button>
