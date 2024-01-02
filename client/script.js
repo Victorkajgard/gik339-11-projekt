@@ -1,5 +1,3 @@
-const { title } = require("process");
-
 const url = "http://localhost:3000/players";
 
 window.addEventListener("load", fetchData);
@@ -88,7 +86,7 @@ function createDeleteModal(id){
 
   document.body.insertAdjacentHTML("beforeend",html);
 
-      localStorage.setItem("currentId", player.id);
+      
   })
 
     
@@ -96,7 +94,11 @@ function createDeleteModal(id){
 
 function deletePlayer(id) {
    fetch(`${url}/${id}`, {method: 'DELETE'})
-        .then((result) => fetchData());
+        .then((result) => {
+          fetchData() 
+          localStorage.removeItem("currentId");
+        });
+        
 }
 
 
@@ -104,9 +106,7 @@ const button = document.getElementsByName("submitUserForm");
 
 button.addEventListener("click", createModal);
 
-//button.addEventListener("submit", handleSubmit);
-const message ="";
-const modalTitle ="";
+
 
 function createModal(){
   const id = localStorage.getItem("currentId");
@@ -160,8 +160,7 @@ function handleSubmit(e) {
         teamcolor2: ""
     };
 
-    let hej = document.getElementById("team");
-    teamArray = hej.value.split(",");
+    teamArray = document.getElementById("team").value.split(",");
     serverPlayerObject.firstName = userForm.firstName.value;
     serverPlayerObject.lastName = userForm.lastName.value;
     serverPlayerObject.team = teamArray[0];

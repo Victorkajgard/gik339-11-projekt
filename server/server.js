@@ -73,7 +73,6 @@ server.put("/players", (req, res) => {
         teamcolor2: bodyData.teamcolor2
     };
 
-    // res.send(player);
     let updateString = "";
     const columnsArray = Object.keys(player);
     columnsArray.forEach((column, i) => {
