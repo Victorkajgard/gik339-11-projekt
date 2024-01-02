@@ -1,3 +1,5 @@
+const { title } = require("process");
+
 const url = "http://localhost:3000/players";
 
 window.addEventListener("load", fetchData);
@@ -68,7 +70,7 @@ function createDeleteModal(id){
         <div x-show="open" x-transition:enter="transition-transform ease-out duration-300" x-transition:enter-start="transform scale-75" x-transition:enter-end="transform scale-100" x-transition:leave="transition-transform ease-in duration-300" x-transition:leave-start="transform scale-100" x-transition:leave-end="transform scale-75" class="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
           <!-- Modal Header -->
           <div class="bg-indigo-500 text-white px-4 py-2 flex justify-between">
-            <h2 class="text-lg font-semibold">Ta bort</h2>
+            <h2 class="text-lg font-semibold">Ta bort spelare</h2>
           </div>
           <!-- Modal Body -->
           <div class="p-4 text-black">
@@ -103,13 +105,17 @@ const button = document.getElementsByName("submitUserForm");
 button.addEventListener("click", createModal);
 
 //button.addEventListener("submit", handleSubmit);
+const message ="";
+const modalTitle ="";
 
 function createModal(){
   const id = localStorage.getItem("currentId");
   if(id) {
-    message = `Vill du ändra spelaren ${userForm.firstName.value} ${userForm.lastName.value}?`
+    message = `Vill du ändra spelaren ${userForm.firstName.value} ${userForm.lastName.value}?`;
+    modalTitle = `Ändra spelare`;
   } else {
-    message = `Vill du lägga till spelaren ${userForm.firstName.value} ${userForm.lastName.value}?`
+    message = `Vill du lägga till spelaren ${userForm.firstName.value} ${userForm.lastName.value}?`;
+    modalTitle = `Lägg till spelare`;
   }
     
 
@@ -122,7 +128,7 @@ function createModal(){
       <div x-show="open" x-transition:enter="transition-transform ease-out duration-300" x-transition:enter-start="transform scale-75" x-transition:enter-end="transform scale-100" x-transition:leave="transition-transform ease-in duration-300" x-transition:leave-start="transform scale-100" x-transition:leave-end="transform scale-75" class="bg-white rounded-md shadow-xl overflow-hidden max-w-md w-full sm:w-96 md:w-1/2 lg:w-2/3 xl:w-1/3 z-50">
         <!-- Modal Header -->
         <div class="bg-indigo-500 text-white px-4 py-2 flex justify-between">
-          <h2 class="text-lg font-semibold">Lägg till</h2>
+          <h2 class="text-lg font-semibold">${modalTitle}</h2>
         </div>
         <!-- Modal Body -->
         <div class="p-4 text-black">
